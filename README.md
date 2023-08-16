@@ -1,7 +1,11 @@
 # EffNet
 Contrastive Learning with Double Siamese Networks for Fine-Grained Sketch-Based Image Retrieval
 
-**We will update soon ~**
+<br>
+
+We will update soon ~
+
+<br>
 
 ## 1. Introduction
 
@@ -40,7 +44,7 @@ python accuracy.py
 
 ### 1.2 Clothes-V1
 
-<div align=center><img src="./figs/dataset.pdf" width = 90%></div>
+<div align=center><img src="./figs/dataset.png" width = 90%></div>
 
 <br>
 
@@ -60,23 +64,22 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 <div align=left>
 
-<tr> 
 | | QMUL-ChairV2 | | | QMUL-ShoeV2 | | | Clothes-V1 | | |
 | Methods | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
-Triplet-SN \cite{yu2016sketch} | 33.75 | 65.94 | 79.26 | 18.62 | 43.09 | 59.31 | 64.36 | 85.82 | 92.73 |
-Triplet-Att-SN \cite{song2017deep} | 37.15 | 67.80 | 82.97 | 22.67 | 51.20 | 65.02 | 70.18 | 83.64 | 91.64 |
-B-Siamese \cite{sain2020cross} | 40.56 | 71.83 | 85.76 | 20.12 | 48.95 | 63.81 | 84.73 | 97.82 | **99.27** | 
-CMHM-SBIR \cite{sain2020cross} | 51.70 | 80.50 | 88.85 | 29.28 | 59.76 | 74.62 | - | - | - |
-OnTheFly \cite{bhunia2020sketch} | 39.01 | 75.85 | 87.00 | 35.91 | 66.78 | 78.54 | 63.27 | 90.18 | 92.73 |
-SketchAA \cite{yang2021sketchaa} | 52.89 | - | 94.88 | 32.22 | - | 79.63 | - | - | - |
-Semi-Sup \cite{bhunia2021more} | 60.20 | 78.10 | 90.81 | 39.10 | 69.90 | **87.50** | - | - | - |
-StyleMeUp \cite{sain2021stylemeup} | 62.86 | 79.60 | 91.14 | 36.47 | 68.10 | 81.83 | - | - | - |
-Adpt-SBIR \cite{bhunia2022adaptive} | - | - | - | 38.30 | **76.60** | - | - | - | - |
-Part-SBIR \cite{chowdhury2022partially} | - | - | - | 39.90 | - | 82.90 | - | - | - |
-NT-SBIR \cite{bhunia2022sketching} | 64.80 | 79.10 | - | 43.70 | 74.90 | - | - | - | - |
-EUPS-SBIR \cite{sain2023exploiting} | 71.22 | - | 92.18 | **44.18** | - | 84.68 | - | - | - |
-**EffNet(Ours)} | **73.31** | **93.24** | **97.15** | 40.11 | 67.54 | 79.29 | **94.12** | **98.91** | **99.27**  |
+| Triplet-SN (CVPR 2016) | 33.75 | 65.94 | 79.26 | 18.62 | 43.09 | 59.31 | 64.36 | 85.82 | 92.73 |
+| Triplet-Att-SN (ICCV 2017) | 37.15 | 67.80 | 82.97 | 22.67 | 51.20 | 65.02 | 70.18 | 83.64 | 91.64 |
+| B-Siamese (BMVC 2020) | 40.56 | 71.83 | 85.76 | 20.12 | 48.95 | 63.81 | 84.73 | 97.82 | **99.27** | 
+| CMHM-SBIR (BMVC 2020) | 51.70 | 80.50 | 88.85 | 29.28 | 59.76 | 74.62 | - | - | - |
+| OnTheFly (CVPR 2020) | 39.01 | 75.85 | 87.00 | 35.91 | 66.78 | 78.54 | 63.27 | 90.18 | 92.73 |
+| SketchAA (ICCV 2021) | 52.89 | - | 94.88 | 32.22 | - | 79.63 | - | - | - |
+| Semi-Sup (CVPR 2021) | 60.20 | 78.10 | 90.81 | 39.10 | 69.90 | **87.50** | - | - | - |
+| StyleMeUp (CVPR 2021) | 62.86 | 79.60 | 91.14 | 36.47 | 68.10 | 81.83 | - | - | - |
+| Adpt-SBIR (CVPR 2022) | - | - | - | 38.30 | **76.60** | - | - | - | - |
+| Part-SBIR (CVPR 2022) | - | - | - | 39.90 | - | 82.90 | - | - | - |
+| NT-SBIR (CVPR 2022) | 64.80 | 79.10 | - | 43.70 | 74.90 | - | - | - | - |
+| EUPS-SBIR (CVPR 2023) | 71.22 | - | 92.18 | **44.18** | - | 84.68 | - | - | - |
+| **EffNet(Ours)} | **73.31** | **93.24** | **97.15** | 40.11 | 67.54 | 79.29 | **94.12** | **98.91** | **99.27**  |
 
 </div>
 
@@ -103,21 +106,37 @@ EUPS-SBIR \cite{sain2023exploiting} | 71.22 | - | 92.18 | **44.18** | - | 84.68 
 
 ### 4.1 Retrieval Performance
 
+#### On QMUL-Shoe-V2
+
 <div align=center><img src="./figs/Re_Shoe.png" width = 90%></div>
+
+#### On QMUL-Chair-V2
 
 <div align=center><img src="./figs/Re_Chair.png" width = 90%></div>
 
+#### On Clothes-V1
+
 <div align=center><img src="./figs/Re_Clothes.png" width = 90%></div>
+
+
 
 ### 4.2 Feature Embedding (T-SNE)
 
+#### On QMUL-Shoe-V2
+
 <div align=center><img src="./figs/TSNE_Shoe.png" width = 90%></div>
+
+#### On QMUL-Chair-V2
 
 <div align=center><img src="./figs/TSNE_Chair.png" width = 90%></div>
 
+#### On Clothes-V1
+
 <div align=center><img src="./figs/TSNE_Clothes.png" width = 90%></div>
 
-### 4.2 Average Attention Distance (T-SNE)
+
+
+### 4.3 Average Attention Distance (T-SNE)
 
 <div align=center><img src="./figs/distance.png" width = 90%></div>
 
