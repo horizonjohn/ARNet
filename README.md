@@ -1,11 +1,13 @@
 # EffNet
 Contrastive Learning with Double Siamese Networks for Fine-Grained Sketch-Based Image Retrieval
 
+**We will update soon ~**
+
 ## 1. Introduction
 
 ### 1.1 Framework
 
-How to keep training ? 
+#### 1.1.1 How to keep training ? 
 
 <br>
 
@@ -15,7 +17,7 @@ How to keep training ?
 
 Our pre-trained model is avialable [**SketchViT Weights**](https://drive.google.com/drive/folders/1q9ZBhmFUC4NdkF-uRvgiArvxWUVPSo_x).
 
-#### 1.1.1 Train model
+#### 1.1.2 Train model
 
 - Download the above data, or you can also rename your own data according to the above data naming format.
 - Put the dataset into (./src/datasets/) directory.
@@ -28,7 +30,7 @@ cd ./src
 python main.py --dataset ClothesV1
 ```
 
-#### 1.1.2 Evaluate model
+#### 1.1.3 Evaluate model
 
 - Modify the path of the training model and use the following command :
 
@@ -59,10 +61,7 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 <div align=left>
 
 <tr> 
-  <th colspan="3"> QMUL-ChairV2 </th>
-  <th colspan="3"> QMUL-ShoeV2 </th>
-  <th colspan="3"> Clothes-V1 </th>
-</tr>
+| | QMUL-ChairV2 | | | QMUL-ShoeV2 | | | Clothes-V1 | | |
 | Methods | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
 Triplet-SN \cite{yu2016sketch} | 33.75 | 65.94 | 79.26 | 18.62 | 43.09 | 59.31 | 64.36 | 85.82 | 92.73 |
