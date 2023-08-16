@@ -64,7 +64,7 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 <div align=left>
 
-| | QMUL-ChairV2 | | | QMUL-ShoeV2 | | | Clothes-V1 | | |
+| Datasets | QMUL-Chair-V2 | - | - | QMUL-Shoe-V2 | - | - | Clothes-V1 | - | - |
 | Methods | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
 | Triplet-SN (CVPR 2016) | 33.75 | 65.94 | 79.26 | 18.62 | 43.09 | 59.31 | 64.36 | 85.82 | 92.73 |
@@ -106,15 +106,15 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 ### 4.1 Retrieval Performance
 
-#### On QMUL-Shoe-V2
+#### 4.1.1 On QMUL-Shoe-V2
 
 <div align=center><img src="./figs/Re_Shoe.png" width = 90%></div>
 
-#### On QMUL-Chair-V2
+#### 4.1.2 On QMUL-Chair-V2
 
 <div align=center><img src="./figs/Re_Chair.png" width = 90%></div>
 
-#### On Clothes-V1
+#### 4.1.3 On Clothes-V1
 
 <div align=center><img src="./figs/Re_Clothes.png" width = 90%></div>
 
@@ -122,15 +122,15 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 ### 4.2 Feature Embedding (T-SNE)
 
-#### On QMUL-Shoe-V2
+#### 4.2.1 On QMUL-Shoe-V2
 
 <div align=center><img src="./figs/TSNE_Shoe.png" width = 90%></div>
 
-#### On QMUL-Chair-V2
+#### 4.2.2 On QMUL-Chair-V2
 
 <div align=center><img src="./figs/TSNE_Chair.png" width = 90%></div>
 
-#### On Clothes-V1
+#### 4.2.3 On Clothes-V1
 
 <div align=center><img src="./figs/TSNE_Clothes.png" width = 90%></div>
 
