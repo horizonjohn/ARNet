@@ -60,11 +60,10 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 ## 2. Experimental Results
 
-### 2.1 QMUL-Chair-V2
+### 2.1 QMUL-Chair-V2 vs. QMUL-Shoe-V2 vs. Clothes-V1
 
 <div align=left>
 
-| Datasets | QMUL-Chair-V2 | - | - | QMUL-Shoe-V2 | - | - | Clothes-V1 | - | - |
 | Methods | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 | Acc.@1 | Acc.@5 | Acc.@10 |
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
 | Triplet-SN (CVPR 2016) | 33.75 | 65.94 | 79.26 | 18.62 | 43.09 | 59.31 | 64.36 | 85.82 | 92.73 |
@@ -79,7 +78,7 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 | Part-SBIR (CVPR 2022) | - | - | - | 39.90 | - | 82.90 | - | - | - |
 | NT-SBIR (CVPR 2022) | 64.80 | 79.10 | - | 43.70 | 74.90 | - | - | - | - |
 | EUPS-SBIR (CVPR 2023) | 71.22 | - | 92.18 | **44.18** | - | 84.68 | - | - | - |
-| **EffNet(Ours)} | **73.31** | **93.24** | **97.15** | 40.11 | 67.54 | 79.29 | **94.12** | **98.91** | **99.27**  |
+| **EffNet(Ours)** | **73.31** | **93.24** | **97.15** | 40.11 | 67.54 | 79.29 | **94.12** | **98.91** | **99.27**  |
 
 </div>
 
