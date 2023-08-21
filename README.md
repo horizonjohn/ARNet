@@ -3,7 +3,7 @@ Contrastive Learning with Double Siamese Networks for Fine-Grained Sketch-Based 
 
 <br>
 
-We will update soon ~
+Thank you for your attention, we will update soon ~
 
 <br>
 
@@ -19,7 +19,7 @@ We will update soon ~
 
 <br>
 
-Our pre-trained model is avialable [**SketchViT Weights**](https://drive.google.com/drive/folders/1q9ZBhmFUC4NdkF-uRvgiArvxWUVPSo_x).
+Our pre-trained model is avialable [**EffNet Weights**](https://drive.google.com/drive/folders/1q9ZBhmFUC4NdkF-uRvgiArvxWUVPSo_x).
 
 #### 1.1.2 Train model
 
