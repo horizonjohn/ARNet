@@ -23,7 +23,28 @@ Our pre-trained model is avialable [**EffNet Weights**](https://drive.google.com
 
 #### 1.1.2 Train model
 
-- Download the above data, or you can also rename your own data according to the above data naming format.
+```bash
+datasets/YourDatasetName/
+  trainA (sketch simples for training)/
+    000001_01.png
+    000001_02.png
+    000001_03.png
+    ...
+    000666_01.png
+    000666_02.png
+    ...
+  trainB (image simples for training)/
+    000001.png
+    ...
+    000666.png
+    ...
+  testA (sketch simples for test)/
+    ...
+  testB (image simples for test)/
+    ...
+```
+
+- Download the above data, or you can also customize your own dataset according to the above dataset naming format.
 - Put the dataset into (./src/datasets/) directory.
 - You can adjust the parameters of the model according to your needs.
 - Use the following command for model training :
@@ -82,60 +103,41 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 
 </div>
 
-### 2.2 Discussion in the Cross Fusion Module
+## 3.  Visualization
 
-<div align=left>
+### 3.1 Retrieval Performance
 
-| ID | Layers | Num heads |  Acc.@1  |  Acc.@5  |  Acc.@10  |
-|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
-| 1 | 5 | 12 | 70.11 | 91.82 | 96.09 |
-| 2 | 3 | 12 | 72.95 | 92.88 | 96.09 |
-| 3 | 3 | 12 | 71.53 | 92.53 | 96.80 |
-| 4 | 1 | 12 | 71.53 | 92.88 | 96.09 |
-| 5 | 3 | 6 | 72.24 | **93.95** | 96.44 |
-| 6 | 3 | 24 | 71.89 | 92.88 | 96.44 |
-| 7 | 3 | 1 | 70.46 | 93.24 | 96.09 |
-| **Ours** | 0 | - | **73.31** | 93.24 | **97.15** |
-
-</div>
-
-<br>
-
-## 4.  Visualization
-
-### 4.1 Retrieval Performance
-
-#### 4.1.1 On QMUL-Shoe-V2
+#### 3.1.1 On QMUL-Shoe-V2
 
 <div align=center><img src="./figs/Re_Shoe.png" width = 90%></div>
 
-#### 4.1.2 On QMUL-Chair-V2
+#### 3.1.2 On QMUL-Chair-V2
 
 <div align=center><img src="./figs/Re_Chair.png" width = 90%></div>
 
-#### 4.1.3 On Clothes-V1
+#### 3.1.3 On Clothes-V1
 
 <div align=center><img src="./figs/Re_Clothes.png" width = 90%></div>
 
 
 
-### 4.2 Feature Embedding (T-SNE)
+### 3.2 Feature Embedding (T-SNE)
 
-#### 4.2.1 On QMUL-Shoe-V2
+#### 3.2.1 On QMUL-Shoe-V2
 
 <div align=center><img src="./figs/TSNE_Shoe.png" width = 90%></div>
 
-#### 4.2.2 On QMUL-Chair-V2
+#### 3.2.2 On QMUL-Chair-V2
 
 <div align=center><img src="./figs/TSNE_Chair.png" width = 90%></div>
 
-#### 4.2.3 On Clothes-V1
+#### 3.2.3 On Clothes-V1
 
 <div align=center><img src="./figs/TSNE_Clothes.png" width = 90%></div>
 
 
 
-### 4.3 Average Attention Distance (T-SNE)
+### 3.3 Average Attention Distance (T-SNE)
 
 <div align=center><img src="./figs/distance.png" width = 90%></div>
 
