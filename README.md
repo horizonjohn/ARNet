@@ -77,8 +77,6 @@ python main.py --dataset ClothesV1
 python accuracy.py
 ```
 
-<br>
-
 ## 2. Experimental Results
 
 ### 2.1 QMUL-Chair-V2 vs. QMUL-Shoe-V2 vs. Clothes-V1
@@ -103,7 +101,7 @@ python accuracy.py
 
 </div>
 
-## 3.  Visualization
+## 3. Results Visualization
 
 ### 3.1 Retrieval Performance
 
