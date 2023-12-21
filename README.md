@@ -21,22 +21,36 @@ Thank you for your attention, we will update soon ~
 
 Our pre-trained model is avialable [**EffNet Weights**](https://drive.google.com/drive/folders/1q9ZBhmFUC4NdkF-uRvgiArvxWUVPSo_x).
 
-#### 1.1.2 Train model
+### 1.2 Clothes-V1
+
+<div align=center><img src="./figs/dataset.png" width = 90%></div>
+
+<br>
+
+The Clothes-V1 is a newly proposed FG-SBIR dataset that aims to facilitate the search for fashion clothing materials by fashion designers. It is also filling the gap in professional fashion clothing datasets in this field. Its multi-level quality can be valuable for other computer vision tasks as well (including FG-SBIR, image generation, image translation, and fashion-related research).
+
+The dataset consists of 1200 sketches and 500 corresponding images, which were split into training and test set with ratios of 925 (380) and 275 (120), respectively.
+
+The sketches were drawn by four professional designers and three junior designers, and the sketches are named using the format **xxxxx_0x.png**, where **xxxxx.png** denotes the corresponding image, and **_0x** denotes the designer (e.g., sketch **00066_01.png** and **00066_06.png** correspond to image **00066.png** and were drawn by designers **01** and **06**, respectively). 
+
+For more details, you can download the [**Clothes-V1**](https://drive.google.com/drive/folders/1630UOV7AFPd2BwjgmZHz8igFAZ68mvnR).
+
+### 1.3 Train model
 
 ```bash
-datasets/YourDatasetName/
+./src/datasets/YourDatasetName/
   trainA (sketch simples for training)/
-    000001_01.png
-    000001_02.png
-    000001_03.png
+    00001_01.png
+    00001_02.png
+    00001_03.png
     ...
-    000666_01.png
-    000666_02.png
+    00666_01.png
+    00666_02.png
     ...
   trainB (image simples for training)/
-    000001.png
+    00001.png
     ...
-    000666.png
+    00666.png
     ...
   testA (sketch simples for test)/
     ...
@@ -55,27 +69,13 @@ cd ./src
 python main.py --dataset ClothesV1
 ```
 
-#### 1.1.3 Evaluate model
+### 1.4 Evaluate model
 
 - Modify the path of the training model and use the following command :
 
 ```
 python accuracy.py
 ```
-
-### 1.2 Clothes-V1
-
-<div align=center><img src="./figs/dataset.png" width = 90%></div>
-
-<br>
-
-The Clothes-V1 is a newly proposed FG-SBIR dataset that aims to facilitate the search for fashion clothing materials by fashion designers. It is also filling the gap in professional fashion clothing datasets in this field. Its multi-level quality can be valuable for other computer vision tasks as well (including FG-SBIR, image generation, image translation, and fashion-related research).
-
-The dataset consists of 1200 sketches and 500 corresponding images, which were split into training and test set with ratios of 925 (380) and 275 (120), respectively.
-
-The sketches were drawn by four professional designers and three junior designers, and the sketches are named using the format **xxxxx_0x.png**, where **xxxxx.png** denotes the corresponding image, and **_0x** denotes the designer (e.g., sketch **00066_01.png** and **00066_06.png** correspond to image **00066.png** and were drawn by designers **01** and **06**, respectively). 
-
-For more details, you can download the [**Clothes-V1**](https://drive.google.com/drive/folders/1630UOV7AFPd2BwjgmZHz8igFAZ68mvnR).
 
 <br>
 
