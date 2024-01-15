@@ -1,7 +1,6 @@
 [INFO]
 Dataset: ChairV2  |  Batch size: 16
-Loading Pretrained model successful !Epoch:[403]  |  Loss:[9.48149]
-Top1: 73.633 %  |  Top5: 94.855 %  |  Top10: 97.428 %
+Loading Pretrained model successful !
 Epoch Train: [1] Contrastive Loss: 584.291880607605
 Testing for dataset accuracy...
 Top1: 40.836 %  |  Top5: 81.350 %  |  Top10: 91.640 %

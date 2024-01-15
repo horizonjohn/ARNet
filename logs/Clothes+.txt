@@ -1,7 +1,6 @@
 [INFO]
 Dataset: ClothesV1  |  Batch size: 16
-Loading Pretrained model successful !Epoch:[359]  |  Loss:[10.20395]
-Top1: 94.182 %  |  Top5: 98.909 %  |  Top10: 99.273 %
+Loading Pretrained model successful !
 Epoch Train: [1] Contrastive Loss: 526.9322242736816
 Testing for dataset accuracy...
 Top1: 63.636 %  |  Top5: 90.182 %  |  Top10: 95.273 %

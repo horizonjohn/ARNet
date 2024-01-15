@@ -1,7 +1,6 @@
 [INFO]
 Dataset: ShoeV2  |  Batch size: 16
-Loading Pretrained model successful !Epoch:[99]  |  Loss:[15.16124]
-Top1: 40.112 %  |  Top5: 67.537 %  |  Top10: 79.291 %
+Loading Pretrained model successful !
 Epoch Train: [1] Contrastive Loss: 3639.991871356964
 Testing for dataset accuracy...
 Top1: 5.556 %  |  Top5: 15.916 %  |  Top10: 25.526 %
