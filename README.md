@@ -66,7 +66,7 @@ For more details, you can download the [**Clothes-V1**](https://drive.google.com
 ```
 cd ./src
 
-python main.py --dataset ClothesV1
+python train_main.py --dataset ClothesV1
 ```
 
 ### 1.4 Evaluate model
@@ -74,7 +74,7 @@ python main.py --dataset ClothesV1
 - Modify the path of the training model and use the following command :
 
 ```
-python accuracy.py
+python FG_SBIR.py
 ```
 
 ## 2. Experimental Results
