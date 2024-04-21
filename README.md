@@ -136,7 +136,7 @@ python FG_SBIR.py
 
 
 
-### 3.3 Average Attention Distance (T-SNE)
+### 3.3 Average Attention Distance
 
 <div align=center><img src="./figs/distance.png" width = 90%></div>
 
