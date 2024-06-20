@@ -1,11 +1,11 @@
 # EffNet
-Contrastive Learning with Double Siamese Networks for Fine-Grained Sketch-Based Image Retrieval
+Simple Yet Efficient: Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment [**[arXiv]**](https://arxiv.org/pdf/2406.11551)
 
-<br>
+<!-- <br> -->
 
-Thank you for your attention, we will update soon ~
+<!-- Thank you for your attention, we will update soon ~ -->
 
-<br>
+<!-- <be> -->
 
 ## 1. Introduction
 
