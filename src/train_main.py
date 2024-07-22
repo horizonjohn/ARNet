@@ -8,7 +8,7 @@ from torch.cuda.amp import GradScaler
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from train_utils_main import EncoderViT, CrossViT, get_acc, cross_loss, LoadMyDataset
+from train_main_utils import EncoderViT, get_acc, cross_loss, LoadMyDataset
 from train_backbone import Backbone_VGG16, Backbone_Resnet50, Backbone_Inception
 
 
@@ -66,9 +66,6 @@ def train_model(args):
     # img_model = Backbone_VGG16()
     # skt_model = Backbone_VGG16()
 
-    cross_model = CrossViT(num_classes=args.num_classes, feature_dim=args.feature_dim,
-                           cross_heads=args.cross_heads)
-
     if args.checkpoint is not None:
         checkpoint = torch.load(args.checkpoint)
         print('Loading Pretrained model successful !'
@@ -77,18 +74,15 @@ def train_model(args):
                                                                  checkpoint['top10']))
         img_model.load_state_dict(checkpoint['img_model'])
         skt_model.load_state_dict(checkpoint['skt_model'])
-        cross_model.load_state_dict(checkpoint['cross_model'])
         start_epoch = checkpoint['epoch']
         end_epoch = end_epoch + checkpoint['epoch']
 
     img_model.to(args.device)
     skt_model.to(args.device)
-    cross_model.to(args.device)
 
     scaler = GradScaler(enabled=args.fp16)
     optimizer = torch.optim.Adam([{"params": img_model.parameters()},
-                                  {"params": skt_model.parameters()},
-                                  {"params": cross_model.parameters()}],
+                                  {"params": skt_model.parameters()}],
                                  args.lr, weight_decay=args.weight_decay)
 
     for epoch in range(start_epoch + 1, end_epoch + 1):
@@ -100,7 +94,6 @@ def train_model(args):
 
         img_model.train()
         skt_model.train()
-        cross_model.train()
 
         # 1.1 training for epochs
         for batch_idx, data in enumerate(tqdm(train_loader)):
@@ -145,7 +138,6 @@ def train_model(args):
 
         img_model.eval()
         skt_model.eval()
-        cross_model.eval()
 
         # 1.2 test for accuracy
         with torch.no_grad():
@@ -180,7 +172,6 @@ def train_model(args):
             args.best_top10_acc = top10_accuracy
             save_state = {'img_model': img_model.state_dict(),
                           'skt_model': skt_model.state_dict(),
-                          'cross_model': cross_model.state_dict(),
                           'epoch': epoch,
                           'loss': round(epoch_train_contrastive_loss, 5),
                           'top1': top1_accuracy,
@@ -192,7 +183,6 @@ def train_model(args):
         if epoch % args.save_iter == 0:
             save_state = {'img_model': img_model.state_dict(),
                           'skt_model': skt_model.state_dict(),
-                          'cross_model': cross_model.state_dict(),
                           'epoch': epoch,
                           'loss': round(epoch_train_contrastive_loss, 5),
                           'top1': top1_accuracy,

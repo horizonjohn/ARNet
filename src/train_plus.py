@@ -8,7 +8,7 @@ from torch.cuda.amp import GradScaler
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from train_utils_plus import get_acc, cross_loss, LoadMyDataset, EncoderViTPlus
+from train_plus_utils import get_acc, cross_loss, LoadMyDataset, EncoderViTPlus
 
 
 def train_model(args):
