@@ -1,9 +1,7 @@
 # EffNet
-Contrastive Learning with Double Siamese Networks for Fine-Grained Sketch-Based Image Retrieval
+Simple Yet Efficient: Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment [**[arXiv]**](https://arxiv.org/pdf/2406.11551)
 
-<br>
-
-Thank you for your attention, we will update soon ~
+Thank you for your attention, we will update our latest version soon ~
 
 <br>
 
@@ -143,4 +141,20 @@ python FG_SBIR.py
 
 <br>
 
+## 3. Reference
+If you find our code or dataset is useful for your research, please cite us, Thanks.
+```yaml
+@article{jiang2024simple,
+  title={Simple Yet Efficient: Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment},
+  author={Jiang, Jianan and Wu, Di and Jiang, Zhilin and Yu, Weiren},
+  journal={arXiv preprint arXiv:2406.11551},
+  year={2024}
+}
+```
+
+Or
+
+```yaml
+Jiang J, Wu D, Jiang Z, et al. Simple Yet Efficient: Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment[J]. arXiv preprint arXiv:2406.11551, 2024.
+```
 
