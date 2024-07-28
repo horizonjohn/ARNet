@@ -177,7 +177,7 @@ def train_model(args):
                           'top1': top1_accuracy,
                           'top5': top5_accuracy,
                           'top10': top10_accuracy}
-            print('Updating Modality Fusion Network (Cross Model) checkpoint [Best Acc]...')
+            print('Updating Modality Fusion Network checkpoint [Best Acc]...')
             torch.save(save_state, os.path.join(save_path, 'model_Best.pth'))
 
         if epoch % args.save_iter == 0:
