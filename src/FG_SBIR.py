@@ -189,7 +189,7 @@ def make_matrix(target_sketch_paths, pred_positions_lists, im_name):
 
 
 if __name__ == "__main__":
-    from train_main_utils import EncoderViT
+    from train_utils import EncoderViT
 
     # checkpoint = torch.load('./results/ChairV2/model_Best.pth')
 

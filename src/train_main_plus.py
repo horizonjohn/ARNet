@@ -10,25 +10,24 @@ from tqdm import tqdm
 
 from train_utils import get_acc, cross_loss
 from data_loader import LoadMyDataset
-from ViT_backbone import EncoderViT, EncoderSViT
-from train_backbone import Backbone_VGG16, Backbone_Resnet50, Backbone_Inception
+from ViT_plus import EncoderViTPlus
 
 
 def train_model(args):
     if args.dataset == 'ClothesV1':
         image_path_train = './datasets/ClothesV1/trainB/'
         sketch_path_train = './datasets/ClothesV1/trainA/'
-        save_path = './checkpoint/ClothesV1/'
+        save_path = './checkpoint/ClothesV1_plus/'
 
     elif args.dataset == 'ChairV2':
         image_path_train = './datasets/ChairV2/trainB/'
         sketch_path_train = './datasets/ChairV2/trainA/'
-        save_path = './checkpoint/ChairV2/'
+        save_path = './checkpoint/ChairV2_plus/'
 
     elif args.dataset == 'ShoeV2':
         image_path_train = './datasets/ShoeV2/trainB/'
         sketch_path_train = './datasets/ShoeV2/trainA/'
-        save_path = './checkpoint/ShoeV2/'
+        save_path = './checkpoint/ShoeV2_plus/'
 
     else:
         raise ValueError('Dataset Name Error !')
@@ -57,35 +56,11 @@ def train_model(args):
     print('Dataset: {}  |  Train set size: {}  |  Batch size: {}\n'
           .format(args.dataset, len(train_set), args.batch_size))
 
-    img_model = EncoderViT(num_classes=args.num_classes, feature_dim=args.feature_dim,
-                           encoder_backbone='vit_base_patch16_224')
-    skt_model = EncoderViT(num_classes=args.num_classes, feature_dim=args.feature_dim,
-                           encoder_backbone='vit_base_patch16_224')
-
-    # img_model = EncoderSViT(num_classes=args.num_classes, encoder_backbone='swin_base_patch4_window7_224')
-    # skt_model = EncoderSViT(num_classes=args.num_classes, encoder_backbone='swin_base_patch4_window7_224')
-
-    # img_model = Backbone_VGG16()
-    # skt_model = Backbone_VGG16()
-
-    if args.checkpoint is not None:
-        checkpoint = torch.load(args.checkpoint)
-        print('Loading Pretrained model successful !'
-              'Epoch:[{}]  |  Loss:[{}]'.format(checkpoint['epoch'], checkpoint['loss']))
-        print('Top1: {} %  |  Top5: {} %  |  Top10: {} %'.format(checkpoint['top1'], checkpoint['top5'],
-                                                                 checkpoint['top10']))
-        img_model.load_state_dict(checkpoint['img_model'])
-        skt_model.load_state_dict(checkpoint['skt_model'])
-        start_epoch = checkpoint['epoch']
-        end_epoch = end_epoch + checkpoint['epoch']
-
-    img_model.to(args.device)
-    skt_model.to(args.device)
+    model = EncoderViTPlus(ckpt_path='./checkpoint/{}/model_Best.pth'.format(args.dataset))
+    model.to(args.device)
 
     scaler = GradScaler(enabled=args.fp16)
-    optimizer = torch.optim.Adam([{"params": img_model.parameters()},
-                                  {"params": skt_model.parameters()}],
-                                 args.lr, weight_decay=args.weight_decay)
+    optimizer = torch.optim.Adam(model.parameters(), args.lr, weight_decay=args.weight_decay)
 
     for epoch in range(start_epoch + 1, end_epoch + 1):
         wandb.log({'Progress': epoch}, step=epoch)
@@ -94,8 +69,7 @@ def train_model(args):
         epoch_cross_loss_self = 0
         epoch_cross_loss_triple = 0
 
-        img_model.train()
-        skt_model.train()
+        model.train()
 
         # 1.1 training for epochs
         for batch_idx, data in enumerate(tqdm(train_loader)):
@@ -106,22 +80,18 @@ def train_model(args):
             optimizer.zero_grad()
 
             # 1.1.1 main contrastive loss
-            skt_mlp_feat, skt_vit_feat = skt_model(skt_anchor)
-            img_mlp_feat, img_vit_feat = img_model(img_anchor)
+            mlp_img_feat, vit_img_feat, mlp_skt_feat, vit_skt_feat = model(img_anchor, skt_anchor)
+            mlp_img_aug_feat, vit_img_aug_feat, mlp_skt_aug_feat, vit_skt_aug_feat = model(img_aug, skt_aug)
 
-            cross_loss_1 = cross_loss(skt_mlp_feat, img_mlp_feat, args)
+            # 1.1.2 loss
+            cross_loss_1 = cross_loss(mlp_skt_feat, mlp_img_feat, args)
 
-            # 1.1.2 self loss
-            skt_aug_feat = skt_model.embedding(skt_aug)[:, 0]
-            img_aug_feat = img_model.embedding(img_aug)[:, 0]
+            cross_loss_2 = cross_loss(vit_skt_feat, vit_skt_aug_feat, args)
+            cross_loss_3 = cross_loss(vit_img_feat, vit_img_aug_feat, args)
 
-            cross_loss_2 = cross_loss(skt_aug_feat, skt_vit_feat[:, 0], args)
-            cross_loss_3 = cross_loss(img_aug_feat, img_vit_feat[:, 0], args)
+            cross_loss_4 = cross_loss(vit_skt_feat, vit_img_feat, args)
 
-            # # 1.1.3 contrastive loss
-            cross_loss_4 = cross_loss(skt_vit_feat[:, 0], img_vit_feat[:, 0], args)
-
-            loss = cross_loss_1 + (cross_loss_2 + cross_loss_3) + cross_loss_4
+            loss = cross_loss_1 + (cross_loss_3 + cross_loss_3) + cross_loss_4
 
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -138,13 +108,12 @@ def train_model(args):
         wandb.log({'Self Loss': epoch_cross_loss_self}, step=epoch)
         wandb.log({'Triple Loss': epoch_cross_loss_triple}, step=epoch)
 
-        img_model.eval()
-        skt_model.eval()
+        model.eval()
 
         # 1.2 test for accuracy
         with torch.no_grad():
             print('Testing for dataset accuracy...')
-            top1_accuracy, top5_accuracy, top10_accuracy = get_acc(skt_model, img_model, batch_size=128,
+            top1_accuracy, top5_accuracy, top10_accuracy = get_acc(model, batch_size=128,
                                                                    dataset=args.dataset, mode='test',
                                                                    device=args.device)
             print('Top1: {:.3f} %  |  Top5: {:.3f} %  |  Top10: {:.3f} %'.format(top1_accuracy,
@@ -154,7 +123,7 @@ def train_model(args):
             wandb.log({'Top5 Acc': top5_accuracy}, step=epoch)
             wandb.log({'Top10 Acc': top10_accuracy}, step=epoch)
 
-            top1_acc_train, top5_acc_train, top10_acc_train = get_acc(skt_model, img_model, batch_size=128,
+            top1_acc_train, top5_acc_train, top10_acc_train = get_acc(model, batch_size=128,
                                                                       dataset=args.dataset, mode='train',
                                                                       device=args.device)
             print('Top1: {:.3f} %  |  Top5: {:.3f} %  |  Top10: {:.3f} %'.format(top1_acc_train,
@@ -172,8 +141,7 @@ def train_model(args):
             args.best_top1_acc = top1_accuracy
             args.best_top5_acc = top5_accuracy
             args.best_top10_acc = top10_accuracy
-            save_state = {'img_model': img_model.state_dict(),
-                          'skt_model': skt_model.state_dict(),
+            save_state = {'model': model.state_dict(),
                           'epoch': epoch,
                           'loss': round(epoch_train_contrastive_loss, 5),
                           'top1': top1_accuracy,
@@ -181,17 +149,6 @@ def train_model(args):
                           'top10': top10_accuracy}
             print('Updating Modality Fusion Network checkpoint [Best Acc]...')
             torch.save(save_state, os.path.join(save_path, 'model_Best.pth'))
-
-        if epoch % args.save_iter == 0:
-            save_state = {'img_model': img_model.state_dict(),
-                          'skt_model': skt_model.state_dict(),
-                          'epoch': epoch,
-                          'loss': round(epoch_train_contrastive_loss, 5),
-                          'top1': top1_accuracy,
-                          'top5': top5_accuracy,
-                          'top10': top10_accuracy}
-            print('Updating Modality Fusion Network checkpoint...')
-            torch.save(save_state, os.path.join(save_path, 'model_' + str(epoch) + '.pth'))
 
     print('Best Acc:\nTop1: {:.3f} %  |  Top5: {:.3f} %  |  Top10: {:.3f} %'.format(args.best_top1_acc,
                                                                                     args.best_top5_acc,
@@ -202,15 +159,15 @@ def train_model(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training script for Cross ViT Network')
-    parser.add_argument('--dataset', default='ChairV2', help='ChairV2, ShoeV2, ClothesV1')
+    parser.add_argument('--dataset', default='ChairV2', help='ClothesV1, ChairV2, ShoeV2')
     parser.add_argument('--num_classes', type=int, default=512, help='num classes')
     parser.add_argument('--feature_dim', type=int, default=768, help='ouput feature dim')
     parser.add_argument('--image_size', type=int, default=224, help='input image size')
     parser.add_argument('--batch_size', type=int, default=16, help='data loader batch size')
     parser.add_argument('--num_workers', type=int, default=4, help='data loader num workers')
-    parser.add_argument('--num_epochs', type=int, default=500, help='training epochs')
+    parser.add_argument('--num_epochs', type=int, default=200, help='training epochs')
     parser.add_argument('--save_iter', type=int, default=100, help='the training iter to save model')
-    parser.add_argument('--lr', type=float, default=6e-6, help='init learning rate')
+    parser.add_argument('--lr', type=float, default=6e-7, help='init learning rate')
     parser.add_argument('--weight_decay', type=float, default=1e-4, help='learning rate weight decay')
     parser.add_argument('--best_top1_acc', type=float, default=0.0, help='the best training Top1 acc')
     parser.add_argument('--best_top5_acc', type=float, default=0.0, help='the best training Top5 acc')
