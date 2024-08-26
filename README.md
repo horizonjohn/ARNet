@@ -165,8 +165,8 @@ python FG_SBIR.py
 If you find our code or dataset useful for your research, please cite our work. Thank you. 🥰🥰
 ```yaml
 @article{jiang2024simple,
-  title={Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment and Multi-Scale Token Recycling},
-  author={Jiang, Jianan and Tang, Hao and Jiang, Zhilin and Yu, Weiren and Wu, Di},
+  title={Simple Yet Efficient: Towards Self-Supervised FG-SBIR with Unified Sample Feature Alignment},
+  author={Jiang, Jianan and Wu, Di and Jiang, Zhilin and Yu, Weiren},
   journal={arXiv preprint arXiv:2406.11551},
   year={2024}
 }
